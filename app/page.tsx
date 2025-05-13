@@ -68,7 +68,8 @@ export default function LandingPage() {
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <div className="text-center md:text-left">
-                <h2 className="text-4xl font-bold mb-4">Stay Informed, Earn Rewards</h2>
+                <h2 className="text-4xl font-bold mb-2">Stay Informed, Earn Rewards</h2>
+                <h3 className="text-xl mb-4 font-medium text-white/90">Your Daily Dose of News, Gen Z Style ✨</h3>
                 <p className="text-lg mb-8">Join our community of news enthusiasts. Read, engage, and earn points for your contributions.</p>
                 <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
                   <Button size="lg" className="bg-white text-green-600 hover:bg-white/90">
