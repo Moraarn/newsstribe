@@ -13,13 +13,10 @@ export default function QuestsPage() {
   return (
     <Tabs defaultValue="quests" className="flex flex-col min-h-screen">
       <div className="flex flex-col flex-1 pb-20">
-        <header className="sticky top-0 z-10 bg-white border-b border-gray-200 px-4 py-3">
+        {/* <header className="sticky top-0 z-10 bg-white border-b border-gray-200 px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <Avatar className="h-8 w-8 mr-2">
-                <AvatarImage src="/placeholder.svg?height=32&width=32" alt="NewsTribe" />
-                <AvatarFallback className="bg-green-600 text-white">NT</AvatarFallback>
-              </Avatar>
+              <img src="/logo.jpg" alt="NewsTribe Logo" width={32} height={32} className="mr-2 rounded-full" />
               <h1 className="text-xl font-bold bg-gradient-to-r from-green-600 to-yellow-500 bg-clip-text text-transparent">
                 NewsTribe
               </h1>
@@ -38,7 +35,7 @@ export default function QuestsPage() {
               </Avatar>
             </div>
           </div>
-        </header>
+        </header> */}
 
         <div className="px-4 py-3">
           <h2 className="text-lg font-bold mb-3">Quests</h2>
