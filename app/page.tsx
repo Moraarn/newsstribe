@@ -49,7 +49,7 @@ export default function LandingPage() {
                     Get Started
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
-                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                  <Button size="lg" variant="outline" className="bg-white text-primary font-semibold border border-primary hover:bg-primary hover:text-white transition-colors">
                     Learn More
                   </Button>
                 </div>
