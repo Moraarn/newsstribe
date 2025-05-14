@@ -1,15 +1,42 @@
 "use client"
 
-import { Award, CheckCircle, Clock, Bell, Search } from "lucide-react"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { BottomNavigation } from "@/components/bottom-navigation"
-import { Tabs } from "@/components/ui/tabs"
+import { useApp } from '@/lib/context';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Trophy, BookOpen, MessageCircle, CheckCircle2, Clock, Award } from "lucide-react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { BottomNavigation } from "@/components/bottom-navigation";
+import { Tabs } from "@/components/ui/tabs";
 
 export default function QuestsPage() {
+  const { quests, quizzes, completeQuest, completeQuiz } = useApp();
+  const router = useRouter();
+  const [selectedQuiz, setSelectedQuiz] = useState<string | null>(null);
+  const [quizAnswers, setQuizAnswers] = useState<Record<string, string>>({});
+
+  const handleQuizAnswer = (questionId: string, answer: string) => {
+    setQuizAnswers(prev => ({ ...prev, [questionId]: answer }));
+  };
+
+  const handleQuizSubmit = (quizId: string) => {
+    const quiz = quizzes.find(q => q.id === quizId);
+    if (!quiz) return;
+
+    let score = 0;
+    quiz.questions.forEach(question => {
+      if (quizAnswers[question.id] === question.correctAnswer) {
+        score += question.points;
+      }
+    });
+
+    completeQuiz(quizId, score);
+    setSelectedQuiz(null);
+    setQuizAnswers({});
+  };
+
   return (
     <Tabs defaultValue="quests" className="flex flex-col min-h-screen">
       <div className="flex flex-col flex-1 pb-20">
@@ -39,13 +66,38 @@ export default function QuestsPage() {
 
         <div className="px-4 py-3">
           <h2 className="text-lg font-bold mb-3">Quests</h2>
-          <div className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg p-4 mb-4 text-white">
-            <div className="flex items-center justify-between mb-2">
-              <h2 className="font-bold text-lg">Daily Quiz</h2>
-              <Badge className="bg-white/20 hover:bg-white/30">+15 points</Badge>
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold mb-4">Daily Quests</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {quests.filter(quest => quest.type === 'daily').map((quest) => (
+                <Card key={quest.id}>
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center">
+                        <Trophy className="h-5 w-5 text-yellow-500 mr-2" />
+                        <h3 className="font-semibold">{quest.title}</h3>
+                      </div>
+                      <Badge className="bg-green-600">+{quest.points} pts</Badge>
+                    </div>
+                    <p className="text-sm text-gray-600 mb-4">{quest.description}</p>
+                    <div className="flex items-center justify-between">
+                      <Progress value={quest.completed ? 100 : 0} className="w-full mr-4" />
+                      <Button
+                        variant={quest.completed ? "outline" : "default"}
+                        size="sm"
+                        onClick={() => !quest.completed && completeQuest(quest.id)}
+                        disabled={quest.completed}
+                      >
+                        {quest.completed ? (
+                          <CheckCircle2 className="h-4 w-4 mr-2" />
+                        ) : null}
+                        {quest.completed ? "Completed" : "Complete"}
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
-            <p className="mb-3">Test your knowledge on today's top stories!</p>
-            <Button className="w-full bg-white text-indigo-700 hover:bg-white/90">Start Quiz</Button>
           </div>
 
           <h2 className="font-bold text-lg mb-3">Active Challenges</h2>
@@ -115,7 +167,7 @@ export default function QuestsPage() {
             <CardHeader className="pb-2">
               <div className="flex justify-between items-start">
                 <CardTitle className="text-base text-gray-500">Read 5 articles today</CardTitle>
-                <CheckCircle className="h-5 w-5 text-green-600" />
+                <CheckCircle2 className="h-5 w-5 text-green-600" />
               </div>
               <CardDescription>Completed</CardDescription>
             </CardHeader>
@@ -129,6 +181,61 @@ export default function QuestsPage() {
               </div>
             </CardFooter>
           </Card>
+
+          <div>
+            <h2 className="text-2xl font-bold mb-4">Knowledge Quizzes</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {quizzes.map((quiz) => (
+                <Card key={quiz.id}>
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center">
+                        <BookOpen className="h-5 w-5 text-blue-500 mr-2" />
+                        <h3 className="font-semibold">{quiz.title}</h3>
+                      </div>
+                      <Badge className="bg-blue-600">+{quiz.totalPoints} pts</Badge>
+                    </div>
+                    
+                    {selectedQuiz === quiz.id ? (
+                      <div className="space-y-4">
+                        {quiz.questions.map((question) => (
+                          <div key={question.id} className="space-y-2">
+                            <p className="font-medium">{question.question}</p>
+                            <div className="grid grid-cols-1 gap-2">
+                              {question.options.map((option) => (
+                                <Button
+                                  key={option}
+                                  variant={quizAnswers[question.id] === option ? "default" : "outline"}
+                                  className="justify-start"
+                                  onClick={() => handleQuizAnswer(question.id, option)}
+                                >
+                                  {option}
+                                </Button>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                        <Button
+                          className="w-full"
+                          onClick={() => handleQuizSubmit(quiz.id)}
+                        >
+                          Submit Quiz
+                        </Button>
+                      </div>
+                    ) : (
+                      <Button
+                        className="w-full"
+                        onClick={() => setSelectedQuiz(quiz.id)}
+                        disabled={quiz.completed}
+                      >
+                        {quiz.completed ? "Completed" : "Start Quiz"}
+                      </Button>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
       <BottomNavigation />

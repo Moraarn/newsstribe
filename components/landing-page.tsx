@@ -11,10 +11,10 @@ export function LandingPage() {
       <header className="sticky top-0 z-10 backdrop-blur-lg bg-white/80 border-b border-gray-100">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center">
-            <div className="h-10 w-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center text-white font-bold mr-2 shadow-lg shadow-green-200">
+            <div className="h-10 w-10 bg-gradient-to-br from-primary to-primary rounded-xl flex items-center justify-center text-white font-bold mr-2 shadow-lg shadow-primary-200">
               NT
             </div>
-            <h1 className="text-2xl font-extrabold bg-gradient-to-r from-green-600 via-emerald-500 to-teal-400 bg-clip-text text-transparent">
+            <h1 className="text-2xl font-extrabold bg-gradient-to-r from-primary via-primary to-primary bg-clip-text text-transparent">
               NewsTribe
             </h1>
           </div>
@@ -27,7 +27,7 @@ export function LandingPage() {
             <Link href="/sign-up">
               <Button
                 size="sm"
-                className="bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 text-white font-medium shadow-md shadow-green-100"
+                className="bg-gradient-to-r from-primary to-primary hover:from-primary-700 hover:to-primary-600 text-white font-medium shadow-md shadow-primary-100"
               >
                 Join Now
               </Button>
@@ -38,18 +38,18 @@ export function LandingPage() {
 
       {/* Hero Section */}
       <section className="relative overflow-hidden py-20 md:py-28">
-        <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-white to-emerald-50 -z-10"></div>
-        <div className="absolute -top-24 -right-24 w-64 h-64 bg-yellow-400 rounded-full opacity-10 blur-3xl"></div>
-        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-green-400 rounded-full opacity-10 blur-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary via-white to-primary -z-10"></div>
+        <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary rounded-full opacity-10 blur-3xl"></div>
+        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-primary rounded-full opacity-10 blur-3xl"></div>
 
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-12 md:mb-0">
-              <Badge className="mb-6 bg-green-100 text-green-800 hover:bg-green-200 hover:text-green-900 text-sm py-1.5 px-4 rounded-full font-medium">
+              <Badge className="mb-6 bg-primary text-primary hover:bg-primary-200 hover:text-primary-900 text-sm py-1.5 px-4 rounded-full font-medium">
                 For Gen Z Kenyans
               </Badge>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent">
-                Get <span className="text-green-600">Rewarded</span> for Staying Informed
+                Get <span className="text-primary">Rewarded</span> for Staying Informed
               </h2>
               <p className="text-lg md:text-xl mb-8 text-gray-600 leading-relaxed max-w-lg">
                 NewsTribe transforms how you consume news. Read, engage, earn points, and redeem for airtime, data
@@ -59,7 +59,7 @@ export function LandingPage() {
                 <Link href="/sign-up">
                   <Button
                     size="lg"
-                    className="w-full sm:w-auto bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 text-white font-medium shadow-lg shadow-green-100/50 rounded-xl"
+                    className="w-full sm:w-auto bg-gradient-to-r from-primary to-primary hover:from-primary-700 hover:to-primary-600 text-white font-medium shadow-lg shadow-primary-100/50 rounded-xl"
                   >
                     Join the Tribe
                   </Button>
@@ -86,7 +86,7 @@ export function LandingPage() {
                           : i === 2
                             ? "from-blue-400 to-indigo-400"
                             : i === 3
-                              ? "from-green-400 to-emerald-400"
+                              ? "from-primary to-primary"
                               : "from-purple-400 to-pink-400"
                       }`}
                     ></div>
@@ -101,7 +101,7 @@ export function LandingPage() {
               <div className="relative w-[280px] h-[560px] md:w-[320px] md:h-[640px]">
                 <div className="absolute inset-0 bg-black rounded-[40px] overflow-hidden border-[12px] border-black shadow-2xl">
                   <div className="relative h-full w-full overflow-hidden rounded-[28px]">
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-emerald-500 opacity-20"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary opacity-20"></div>
                     <Image
                       src="https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg"
                       alt="NewsTribe App"
@@ -113,7 +113,7 @@ export function LandingPage() {
                       <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-4 mb-4 shadow-xl">
                         <div className="flex items-center justify-between mb-2">
                           <Badge className="bg-red-500 text-white">Breaking</Badge>
-                          <Badge className="bg-yellow-500 text-black flex items-center gap-1">
+                          <Badge className="bg-primary text-black flex items-center gap-1">
                             <Award className="h-3 w-3" />
                             +15 pts
                           </Badge>
@@ -134,8 +134,8 @@ export function LandingPage() {
                 </div>
 
                 {/* Decorative elements */}
-                <div className="absolute -top-6 -right-6 w-24 h-24 bg-yellow-400 rounded-full opacity-20 blur-2xl"></div>
-                <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-green-400 rounded-full opacity-20 blur-2xl"></div>
+                <div className="absolute -top-6 -right-6 w-24 h-24 bg-primary rounded-full opacity-20 blur-2xl"></div>
+                <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-primary rounded-full opacity-20 blur-2xl"></div>
               </div>
             </div>
           </div>
@@ -146,7 +146,7 @@ export function LandingPage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-green-100 text-green-800 hover:bg-green-200 hover:text-green-900 text-sm py-1.5 px-4 rounded-full font-medium">
+            <Badge className="mb-4 bg-primary text-primary hover:bg-primary-200 hover:text-primary-900 text-sm py-1.5 px-4 rounded-full font-medium">
               Features
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Join NewsTribe?</h2>
@@ -156,43 +156,43 @@ export function LandingPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 border border-green-100 shadow-sm hover:shadow-md transition-all">
-              <div className="bg-gradient-to-br from-green-500 to-emerald-500 w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-green-200">
+            <div className="bg-gradient-to-br from-primary to-primary rounded-2xl p-8 border border-primary shadow-sm hover:shadow-md transition-all">
+              <div className="bg-gradient-to-br from-primary to-primary w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-primary-200">
                 <Award className="h-7 w-7 text-white" />
               </div>
               <h3 className="text-xl font-bold mb-3">Earn Points</h3>
               <p className="text-gray-600 mb-6">
                 Get rewarded for reading articles, taking quizzes, and engaging with content that matters to you.
               </p>
-              <div className="flex items-center text-green-600 font-medium">
+              <div className="flex items-center text-primary font-medium">
                 <span>Learn more</span>
                 <ChevronRight className="h-4 w-4 ml-1" />
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-yellow-50 to-amber-50 rounded-2xl p-8 border border-yellow-100 shadow-sm hover:shadow-md transition-all">
-              <div className="bg-gradient-to-br from-yellow-500 to-amber-500 w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-yellow-200">
+            <div className="bg-gradient-to-br from-primary to-primary rounded-2xl p-8 border border-primary shadow-sm hover:shadow-md transition-all">
+              <div className="bg-gradient-to-br from-primary to-primary w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-primary-200">
                 <Gift className="h-7 w-7 text-white" />
               </div>
               <h3 className="text-xl font-bold mb-3">Redeem Rewards</h3>
               <p className="text-gray-600 mb-6">
                 Turn your points into airtime, data bundles, event tickets, and exclusive content access.
               </p>
-              <div className="flex items-center text-yellow-600 font-medium">
+              <div className="flex items-center text-primary font-medium">
                 <span>Learn more</span>
                 <ChevronRight className="h-4 w-4 ml-1" />
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-8 border border-orange-100 shadow-sm hover:shadow-md transition-all">
-              <div className="bg-gradient-to-br from-orange-500 to-red-500 w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-orange-200">
+            <div className="bg-gradient-to-br from-primary to-primary rounded-2xl p-8 border border-primary shadow-sm hover:shadow-md transition-all">
+              <div className="bg-gradient-to-br from-primary to-primary w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-primary-200">
                 <Newspaper className="h-7 w-7 text-white" />
               </div>
               <h3 className="text-xl font-bold mb-3">Quality Content</h3>
               <p className="text-gray-600 mb-6">
                 Access trusted news from Nation Media Group, personalized to your interests and preferences.
               </p>
-              <div className="flex items-center text-orange-600 font-medium">
+              <div className="flex items-center text-primary font-medium">
                 <span>Learn more</span>
                 <ChevronRight className="h-4 w-4 ml-1" />
               </div>
@@ -217,13 +217,13 @@ export function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="relative">
               <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-md h-full">
-                <div className="bg-gradient-to-br from-green-500 to-emerald-500 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-white font-bold text-xl shadow-lg shadow-green-200">
+                <div className="bg-gradient-to-br from-primary to-primary w-12 h-12 rounded-full flex items-center justify-center mb-6 text-white font-bold text-xl shadow-lg shadow-primary-200">
                   1
                 </div>
                 <h3 className="text-xl font-bold mb-3">Sign Up</h3>
                 <p className="text-gray-600">Create your account and select your interests</p>
               </div>
-              <div className="hidden md:block absolute top-1/2 left-full w-full h-0.5 bg-gradient-to-r from-green-500 to-transparent -translate-y-1/2 -z-10"></div>
+              <div className="hidden md:block absolute top-1/2 left-full w-full h-0.5 bg-gradient-to-r from-primary to-transparent -translate-y-1/2 -z-10"></div>
             </div>
 
             <div className="relative">
@@ -239,18 +239,18 @@ export function LandingPage() {
 
             <div className="relative">
               <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-md h-full">
-                <div className="bg-gradient-to-br from-yellow-500 to-amber-500 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-white font-bold text-xl shadow-lg shadow-yellow-200">
+                <div className="bg-gradient-to-br from-primary to-primary w-12 h-12 rounded-full flex items-center justify-center mb-6 text-white font-bold text-xl shadow-lg shadow-primary-200">
                   3
                 </div>
                 <h3 className="text-xl font-bold mb-3">Earn Points</h3>
                 <p className="text-gray-600">Collect points for every interaction and activity</p>
               </div>
-              <div className="hidden md:block absolute top-1/2 left-full w-full h-0.5 bg-gradient-to-r from-yellow-500 to-transparent -translate-y-1/2 -z-10"></div>
+              <div className="hidden md:block absolute top-1/2 left-full w-full h-0.5 bg-gradient-to-r from-primary to-transparent -translate-y-1/2 -z-10"></div>
             </div>
 
             <div className="relative">
               <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-md h-full">
-                <div className="bg-gradient-to-br from-orange-500 to-red-500 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-white font-bold text-xl shadow-lg shadow-orange-200">
+                <div className="bg-gradient-to-br from-primary to-primary w-12 h-12 rounded-full flex items-center justify-center mb-6 text-white font-bold text-xl shadow-lg shadow-primary-200">
                   4
                 </div>
                 <h3 className="text-xl font-bold mb-3">Redeem Rewards</h3>
@@ -265,9 +265,9 @@ export function LandingPage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 border border-green-100 shadow-sm flex flex-col items-center text-center">
-              <TrendingUp className="h-12 w-12 text-green-600 mb-4" />
-              <h3 className="text-4xl font-bold mb-2 bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text text-transparent">
+            <div className="bg-gradient-to-br from-primary to-primary rounded-2xl p-8 border border-primary shadow-sm flex flex-col items-center text-center">
+              <TrendingUp className="h-12 w-12 text-primary mb-4" />
+              <h3 className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent">
                 10K+
               </h3>
               <p className="text-gray-600 font-medium">Active Users</p>
@@ -281,9 +281,9 @@ export function LandingPage() {
               <p className="text-gray-600 font-medium">Daily Articles</p>
             </div>
 
-            <div className="bg-gradient-to-br from-yellow-50 to-amber-50 rounded-2xl p-8 border border-yellow-100 shadow-sm flex flex-col items-center text-center">
-              <Gift className="h-12 w-12 text-yellow-600 mb-4" />
-              <h3 className="text-4xl font-bold mb-2 bg-gradient-to-r from-yellow-600 to-amber-500 bg-clip-text text-transparent">
+            <div className="bg-gradient-to-br from-primary to-primary rounded-2xl p-8 border border-primary shadow-sm flex flex-col items-center text-center">
+              <Gift className="h-12 w-12 text-primary mb-4" />
+              <h3 className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent">
                 5M+
               </h3>
               <p className="text-gray-600 font-medium">Points Redeemed</p>
@@ -326,7 +326,7 @@ export function LandingPage() {
                 "I've earned enough points for 3GB of data this month just by reading news I was going to read anyway.
                 NewsTribe makes staying informed rewarding!"
               </p>
-              <div className="flex text-yellow-400">
+              <div className="flex text-primary">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <svg key={star} className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                     <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
@@ -355,7 +355,7 @@ export function LandingPage() {
                 "The daily quizzes are my favorite feature. They help me retain information and I've learned so much
                 about current events while earning rewards."
               </p>
-              <div className="flex text-yellow-400">
+              <div className="flex text-primary">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <svg key={star} className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                     <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
@@ -366,7 +366,7 @@ export function LandingPage() {
 
             <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-md">
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-teal-500 mr-4"></div>
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary mr-4"></div>
                 <div>
                   <h4 className="font-bold">Aisha M.</h4>
                   <p className="text-gray-500 text-sm">Small Business Owner</p>
@@ -376,7 +376,7 @@ export function LandingPage() {
                 "I redeemed my points for a ticket to a business networking event. The rewards are actually valuable and
                 relevant to my interests!"
               </p>
-              <div className="flex text-yellow-400">
+              <div className="flex text-primary">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <svg key={star} className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                     <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
@@ -390,20 +390,20 @@ export function LandingPage() {
 
       {/* CTA Section */}
       <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-emerald-700 -z-10"></div>
-        <div className="absolute -top-24 -right-24 w-64 h-64 bg-yellow-400 rounded-full opacity-20 blur-3xl"></div>
-        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-green-400 rounded-full opacity-20 blur-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary -z-10"></div>
+        <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary rounded-full opacity-20 blur-3xl"></div>
+        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-primary rounded-full opacity-20 blur-3xl"></div>
 
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Ready to Join the Tribe?</h2>
-          <p className="text-xl mb-10 max-w-2xl mx-auto text-green-50">
+          <p className="text-xl mb-10 max-w-2xl mx-auto text-primary">
             Start earning points, staying informed, and redeeming rewards today.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link href="/sign-up">
               <Button
                 size="lg"
-                className="bg-white text-green-700 hover:bg-gray-100 font-medium shadow-lg shadow-green-900/20 rounded-xl"
+                className="bg-white text-primary hover:bg-gray-100 font-medium shadow-lg shadow-primary-900/20 rounded-xl"
               >
                 Get Started Now
               </Button>
@@ -421,15 +421,15 @@ export function LandingPage() {
 
           <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
             <div className="flex items-center gap-2 text-white">
-              <CheckCircle className="h-5 w-5 text-green-300" />
+              <CheckCircle className="h-5 w-5 text-primary-300" />
               <span>No credit card required</span>
             </div>
             <div className="flex items-center gap-2 text-white">
-              <CheckCircle className="h-5 w-5 text-green-300" />
+              <CheckCircle className="h-5 w-5 text-primary-300" />
               <span>Free to join</span>
             </div>
             <div className="flex items-center gap-2 text-white">
-              <CheckCircle className="h-5 w-5 text-green-300" />
+              <CheckCircle className="h-5 w-5 text-primary-300" />
               <span>Cancel anytime</span>
             </div>
           </div>
@@ -442,7 +442,7 @@ export function LandingPage() {
           <div className="flex flex-col md:flex-row justify-between mb-12">
             <div className="mb-10 md:mb-0 md:max-w-xs">
               <div className="flex items-center mb-6">
-                <div className="h-10 w-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center text-white font-bold mr-2 shadow-lg shadow-green-900/20">
+                <div className="h-10 w-10 bg-gradient-to-br from-primary to-primary rounded-xl flex items-center justify-center text-white font-bold mr-2 shadow-lg shadow-primary-900/20">
                   NT
                 </div>
                 <h1 className="text-2xl font-extrabold text-white">NewsTribe</h1>

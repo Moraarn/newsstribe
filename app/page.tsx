@@ -37,7 +37,7 @@ export default function LandingPage() {
     <div className="flex flex-col min-h-screen">
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-r from-green-600 to-yellow-500 text-white py-16 px-4">
+        <section className="relative bg-gradient-to-r from-primary to-primary text-white py-16 px-4">
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <div className="text-center md:text-left">
@@ -45,7 +45,7 @@ export default function LandingPage() {
                 <h3 className="text-xl mb-4 font-medium text-white/90">Your Daily Dose of News, Gen Z Style ✨</h3>
                 <p className="text-lg mb-8">Join our community of news enthusiasts. Read, engage, and earn points for your contributions.</p>
                 <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-                  <Button size="lg" className="bg-white text-green-600 hover:bg-white/90">
+                  <Button size="lg" className="bg-white text-primary hover:bg-white/90">
                     Get Started
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -57,7 +57,7 @@ export default function LandingPage() {
               <div className="relative">
                 <div className="relative w-[280px] h-[560px] mx-auto bg-black rounded-[40px] p-4 shadow-2xl">
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] bg-black rounded-b-[20px]"></div>
-                  <div className="w-full h-full bg-gradient-to-br from-green-500/20 to-yellow-500/20 rounded-[32px] overflow-hidden">
+                  <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/10 rounded-[32px] overflow-hidden">
                     <div className="p-6">
                       <div className="flex items-center justify-between mb-6">
                         <div className="flex items-center">
@@ -98,8 +98,8 @@ export default function LandingPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <Card className="border-none shadow-lg">
                 <CardHeader>
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                    <Users className="h-6 w-6 text-green-600" />
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <Users className="h-6 w-6 text-primary" />
                   </div>
                   <CardTitle>Community Driven</CardTitle>
                   <CardDescription>Join a vibrant community of news enthusiasts and share your insights.</CardDescription>
@@ -107,8 +107,8 @@ export default function LandingPage() {
               </Card>
               <Card className="border-none shadow-lg">
                 <CardHeader>
-                  <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
-                    <Award className="h-6 w-6 text-yellow-600" />
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <Award className="h-6 w-6 text-primary" />
                   </div>
                   <CardTitle>Earn Rewards</CardTitle>
                   <CardDescription>Get points for reading, commenting, and sharing news articles.</CardDescription>
@@ -132,14 +132,16 @@ export default function LandingPage() {
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-between mb-8">
               <h3 className="text-2xl font-bold">Trending Now</h3>
-              <Button variant="ghost" className="text-green-600">
+              <Button variant="ghost" className="text-primary">
                 View All
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {trendingNews.map((item) => (
-                <NewsCard key={item.id} {...item} />
+                <NewsCard onRead={function (): void {
+                  throw new Error("Function not implemented.")
+                } } key={item.id} {...item} />
               ))}
             </div>
           </div>
@@ -150,15 +152,15 @@ export default function LandingPage() {
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
               <div>
-                <h4 className="text-4xl font-bold text-green-600 mb-2">10K+</h4>
+                <h4 className="text-4xl font-bold text-primary mb-2">10K+</h4>
                 <p className="text-gray-600">Active Users</p>
               </div>
               <div>
-                <h4 className="text-4xl font-bold text-green-600 mb-2">50K+</h4>
+                <h4 className="text-4xl font-bold text-primary mb-2">50K+</h4>
                 <p className="text-gray-600">Articles Read</p>
               </div>
               <div>
-                <h4 className="text-4xl font-bold text-green-600 mb-2">1M+</h4>
+                <h4 className="text-4xl font-bold text-primary mb-2">1M+</h4>
                 <p className="text-gray-600">Points Earned</p>
               </div>
             </div>
@@ -166,11 +168,11 @@ export default function LandingPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 px-4 bg-gradient-to-r from-green-600 to-yellow-500 text-white">
+        <section className="py-16 px-4 bg-gradient-to-r from-primary to-primary text-white">
           <div className="max-w-4xl mx-auto text-center">
             <h3 className="text-3xl font-bold mb-4">Ready to Join NewsTribe?</h3>
             <p className="text-lg mb-8">Start reading, engaging, and earning rewards today.</p>
-            <Button size="lg" className="bg-white text-green-600 hover:bg-white/90">
+            <Button size="lg" className="bg-white text-primary hover:bg-white/90">
               Sign Up Now
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>

@@ -9,46 +9,19 @@ import { PointsTracker } from "@/components/points-tracker"
 import { BottomNavigation } from "@/components/bottom-navigation"
 import { Tabs } from "@/components/ui/tabs"
 import Image from "next/image"
+import { useApp } from "@/lib/context"
 
 export default function HomeScreen() {
-  const newsItems = [
-    {
-      id: 1,
-      title: "Kenya's Tech Boom: Nairobi Emerges as Africa's Silicon Savannah",
-      category: "Technology",
-      author: "James Mwangi",
-      readTime: "4 min",
-      points: 15,
-      image: "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg",
-    },
-    {
-      id: 2,
-      title: "Harambee Stars Qualify for AFCON 2025 After Thrilling Victory",
-      category: "Sports",
-      author: "Wanjiku Njeri",
-      readTime: "3 min",
-      points: 10,
-      image: "https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg",
-    },
-    {
-      id: 3,
-      title: "New Climate Policy: Kenya Pledges Carbon Neutrality by 2050",
-      category: "Environment",
-      author: "David Ochieng",
-      readTime: "5 min",
-      points: 20,
-      image: "https://images.pexels.com/photos/1366630/pexels-photo-1366630.jpeg",
-    },
-    {
-      id: 4,
-      title: "Kenyan Film 'Rafiki' Wins International Award at Cannes",
-      category: "Entertainment",
-      author: "Aisha Mohamed",
-      readTime: "2 min",
-      points: 10,
-      image: "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg",
-    },
-  ]
+  const { articles, user, addPoints, addNotification } = useApp();
+
+  const handleArticleRead = (articleId: number) => {
+    addPoints(10); // Add 10 points for reading
+    addNotification({
+      type: 'achievement',
+      message: 'You earned 10 points for reading an article!',
+      read: false,
+    });
+  };
 
   return (
     <Tabs defaultValue="home" className="flex flex-col min-h-screen">
@@ -78,15 +51,19 @@ export default function HomeScreen() {
         </header> */}
 
         <div className="px-4 py-3">
-          <PointsTracker points={120} />
+          <PointsTracker points={user.points} />
           <Notification message="New quiz available: 'Kenya's Political History'" type="quiz" />
         </div>
 
         <div className="px-4 py-2">
           <h2 className="text-lg font-bold mb-3">Your Daily Feed</h2>
           <div className="space-y-4">
-            {newsItems.map((item) => (
-              <NewsCard key={item.id} {...item} />
+            {articles.map((item) => (
+              <NewsCard 
+                key={item.id} 
+                {...item} 
+                onRead={() => handleArticleRead(item.id)}
+              />
             ))}
           </div>
         </div>

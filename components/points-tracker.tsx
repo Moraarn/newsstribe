@@ -6,7 +6,7 @@ interface PointsTrackerProps {
 
 export function PointsTracker({ points }: PointsTrackerProps) {
   return (
-    <div className="bg-gradient-to-r from-green-600 to-green-500 rounded-lg p-3 mb-4 text-white flex items-center justify-between">
+    <div className="bg-gradient-to-r from-primary to-primary rounded-lg p-3 mb-4 text-white flex items-center justify-between">
       <div>
         <h3 className="font-bold text-sm">Weekly Points</h3>
         <p className="text-lg font-bold">You earned {points} points this week!</p>

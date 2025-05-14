@@ -1,6 +1,7 @@
 "use client"
 
-import { Bell, Search, Award, BookOpen, Share2, Settings, LogOut, Edit2 } from "lucide-react"
+import { useApp } from '@/lib/context';
+import { Bell, Search, Award, BookOpen, Share2, Settings, LogOut, Edit2, Trophy, Star, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { BottomNavigation } from "@/components/bottom-navigation"
@@ -12,6 +13,29 @@ import { PointsTracker } from "@/components/points-tracker"
 import { Notification } from "@/components/notification"
 
 export default function ProfilePage() {
+  const { user, articles, notifications } = useApp();
+
+  // Calculate user statistics
+  const totalArticlesRead = articles.filter(article => 
+    article.comments.some(comment => comment.userId === user.id)
+  ).length;
+
+  const totalComments = articles.reduce((acc, article) => 
+    acc + article.comments.filter(comment => comment.userId === user.id).length, 0
+  );
+
+  const totalNotifications = notifications.length;
+
+  // Determine user tier based on points
+  const getTier = (points: number) => {
+    if (points >= 1000) return { name: 'Platinum', color: 'bg-gray-400' };
+    if (points >= 500) return { name: 'Gold', color: 'bg-yellow-400' };
+    if (points >= 200) return { name: 'Silver', color: 'bg-gray-300' };
+    return { name: 'Bronze', color: 'bg-amber-600' };
+  };
+
+  const tier = getTier(user.points);
+
   return (
     <Tabs defaultValue="profile" className="flex flex-col min-h-screen">
       <div className="flex flex-col flex-1 pb-20">
@@ -43,13 +67,15 @@ export default function ProfilePage() {
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center">
               <Avatar className="h-20 w-20 mr-4">
-                <AvatarImage src="/placeholder.svg?height=80&width=80" alt="User" />
-                <AvatarFallback className="bg-orange-500 text-white text-2xl">JD</AvatarFallback>
+                <AvatarImage src="/placeholder.svg" alt={user.name} />
+                <AvatarFallback>{user.name[0]}</AvatarFallback>
               </Avatar>
               <div>
-                <h2 className="text-xl font-bold">John Doe</h2>
-                <p className="text-gray-500">@johndoe</p>
-                <Badge className="mt-2 bg-green-600 hover:bg-green-700">Level 5</Badge>
+                <h2 className="text-xl font-bold">{user.name}</h2>
+                <div className="flex items-center space-x-2 mt-1">
+                  <Badge className={tier.color}>{tier.name}</Badge>
+                  <span className="text-gray-600">Member since {new Date(user.joinDate).toLocaleDateString()}</span>
+                </div>
               </div>
             </div>
             <Button variant="outline" size="icon">
@@ -57,7 +83,7 @@ export default function ProfilePage() {
             </Button>
           </div>
 
-          <PointsTracker points={350} />
+          <PointsTracker points={user.points} />
 
           <Notification 
             message="You're 3 comments away from earning the Community Builder badge!" 
@@ -67,19 +93,19 @@ export default function ProfilePage() {
           <div className="grid grid-cols-3 gap-4 mb-6">
             <Card>
               <CardHeader className="p-4">
-                <CardTitle className="text-2xl font-bold">1,250</CardTitle>
+                <CardTitle className="text-2xl font-bold">{user.points}</CardTitle>
                 <CardDescription>Points</CardDescription>
               </CardHeader>
             </Card>
             <Card>
               <CardHeader className="p-4">
-                <CardTitle className="text-2xl font-bold">156</CardTitle>
+                <CardTitle className="text-2xl font-bold">{totalArticlesRead}</CardTitle>
                 <CardDescription>Articles Read</CardDescription>
               </CardHeader>
             </Card>
             <Card>
               <CardHeader className="p-4">
-                <CardTitle className="text-2xl font-bold">42</CardTitle>
+                <CardTitle className="text-2xl font-bold">{totalComments}</CardTitle>
                 <CardDescription>Comments</CardDescription>
               </CardHeader>
             </Card>
@@ -102,20 +128,15 @@ export default function ProfilePage() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div>
-                      <p className="font-medium">Read "Breaking: Major Cabinet Reshuffle"</p>
-                      <p className="text-sm text-gray-500">2 hours ago</p>
-                    </div>
-                    <Separator />
-                    <div>
-                      <p className="font-medium">Commented on "Kenyan Startup Raises $10M"</p>
-                      <p className="text-sm text-gray-500">5 hours ago</p>
-                    </div>
-                    <Separator />
-                    <div>
-                      <p className="font-medium">Shared "New Tech Hub Opens in Nairobi"</p>
-                      <p className="text-sm text-gray-500">Yesterday</p>
-                    </div>
+                    {notifications.slice(0, 5).map((notification, index) => (
+                      <div key={index} className="flex items-center space-x-3">
+                        <Star className="h-5 w-5 text-yellow-500" />
+                        <p className="text-sm">{notification.message}</p>
+                        <span className="text-xs text-gray-500">
+                          {new Date(notification.timestamp).toLocaleDateString()}
+                        </span>
+                      </div>
+                    ))}
                   </div>
                 </CardContent>
               </Card>

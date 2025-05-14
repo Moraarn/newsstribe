@@ -1,106 +1,129 @@
 "use client"
 
-import { Bell, Search } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { BottomNavigation } from "@/components/bottom-navigation"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { NewsCard } from "@/components/news-card"
-import { PointsTracker } from "@/components/points-tracker"
-import { Notification } from "@/components/notification"
+import { useApp } from '@/lib/context';
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { BookOpen, Share2, Search } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function ExplorePage() {
-  const trendingNews = [
-    {
-      id: 1,
-      title: "Breaking: Major Cabinet Reshuffle Announced by President",
-      category: "Politics",
-      author: "John Kamau",
-      readTime: "6 min",
-      points: 25,
-      image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg",
-    },
-    {
-      id: 2,
-      title: "Kenyan Startup Raises $10M in Series A Funding",
-      category: "Business",
-      author: "Sarah Odhiambo",
-      readTime: "4 min",
-      points: 15,
-      image: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg",
-    },
-    {
-      id: 3,
-      title: "New Tech Hub Opens in Nairobi's Westlands",
-      category: "Technology",
-      author: "David Mwangi",
-      readTime: "3 min",
-      points: 20,
-      image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg",
-    }
-  ]
+  const { articles } = useApp();
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  // Define main categories
+  const categories = [
+    { id: "all", label: "All" },
+    { id: "technology", label: "Technology" },
+    { id: "sports", label: "Sports" },
+    { id: "environment", label: "Environment" },
+    { id: "entertainment", label: "Entertainment" },
+    { id: "business", label: "Business" }
+  ];
+
+  // Filter articles based on search and category
+  const filteredArticles = articles.filter(article => {
+    const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         article.content.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory === "all" || 
+                          article.category.toLowerCase() === selectedCategory.toLowerCase();
+    return matchesSearch && matchesCategory;
+  });
+
+  const handleReadClick = (articleId: number) => {
+    router.push(`/article/${articleId}`);
+  };
 
   return (
-    <Tabs defaultValue="explore" className="flex flex-col min-h-screen">
-      <div className="flex flex-col flex-1 pb-20">
-        {/* <header className="sticky top-0 z-10 bg-white border-b border-gray-200 px-4 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <img src="/logo.jpg" alt="NewsTribe Logo" width={32} height={32} className="mr-2 rounded-full" />
-              <h1 className="text-xl font-bold bg-gradient-to-r from-green-600 to-yellow-500 bg-clip-text text-transparent">
-                NewsTribe
-              </h1>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell className="h-5 w-5" />
-                <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
-              </Button>
-              <Button variant="ghost" size="icon">
-                <Search className="h-5 w-5" />
-              </Button>
-              <Avatar className="h-8 w-8">
-                <AvatarImage src="/placeholder.svg?height=32&width=32" alt="User" />
-                <AvatarFallback className="bg-orange-500 text-white">JD</AvatarFallback>
-              </Avatar>
-            </div>
-          </div>
-        </header> */}
-
-        <div className="px-4 py-3">
-          <PointsTracker points={250} />
-
-          <Notification 
-            message="New articles available in your favorite categories!" 
-            type="news" 
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Search Bar */}
+        <div className="relative mb-6">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <Input
+            type="text"
+            placeholder="Search articles..."
+            className="pl-10"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
+        </div>
 
-          <h2 className="text-lg font-bold mb-3">Explore</h2>
-          <Tabs defaultValue="trending">
-            <TabsList className="grid w-full grid-cols-4 mb-4">
-              <TabsTrigger value="trending">Trending</TabsTrigger>
-              <TabsTrigger value="politics">Politics</TabsTrigger>
-              <TabsTrigger value="business">Business</TabsTrigger>
-              <TabsTrigger value="sports">Sports</TabsTrigger>
-            </TabsList>
-            <TabsContent value="trending" className="space-y-4 mt-2">
-              {trendingNews.map((item) => (
-                <NewsCard key={item.id} {...item} />
-              ))}
-            </TabsContent>
-            <TabsContent value="politics" className="space-y-4 mt-2">
-              <p className="text-center text-gray-500 py-8">Select topics to follow</p>
-            </TabsContent>
-            <TabsContent value="business" className="space-y-4 mt-2">
-              <p className="text-center text-gray-500 py-8">Select topics to follow</p>
-            </TabsContent>
-            <TabsContent value="sports" className="space-y-4 mt-2">
-              <p className="text-center text-gray-500 py-8">Select topics to follow</p>
-            </TabsContent>
-          </Tabs>
+        {/* Category Tabs */}
+        <Tabs defaultValue="all" className="mb-6" onValueChange={setSelectedCategory}>
+          <TabsList className="flex flex-wrap gap-2">
+            {categories.map((category) => (
+              <TabsTrigger
+                key={category.id}
+                value={category.id}
+                className="capitalize transition-colors duration-150
+                  hover:bg-green-100 hover:text-green-700
+                  data-[state=active]:font-bold
+                  data-[state=active]:text-green-600
+                  data-[state=active]:border-b-2
+                  data-[state=active]:border-green-600
+                  data-[state=active]:bg-green-50"
+              >
+                {category.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
+
+        {/* Articles Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredArticles.length > 0 ? (
+            filteredArticles.map((article) => (
+              <Card key={article.id} className="overflow-hidden">
+                <div className="relative h-48">
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <Badge className="absolute top-2 left-2 bg-green-600">
+                    {article.category}
+                  </Badge>
+                  <Badge className="absolute top-2 right-2 bg-yellow-500">
+                    +{article.points} pts
+                  </Badge>
+                </div>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold text-lg mb-2 line-clamp-2">{article.title}</h3>
+                  <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
+                    <span>{article.author}</span>
+                    <span className="flex items-center">
+                      <BookOpen className="h-4 w-4 mr-1" />
+                      {article.readTime}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => handleReadClick(article.id)}
+                    >
+                      Read Article
+                    </Button>
+                    <Button variant="ghost" size="icon">
+                      <Share2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-8">
+              <p className="text-gray-500">No articles found matching your search criteria.</p>
+            </div>
+          )}
         </div>
       </div>
-      <BottomNavigation />
-    </Tabs>
-  )
+    </div>
+  );
 }
